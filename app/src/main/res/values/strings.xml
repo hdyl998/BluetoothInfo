@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">智能蓝牙通信</string>
+    <string name="main_title_server">模拟服务端</string>
+    <string name="main_title_client">模拟客户端</string>
+    <string name="main_title_client2">客户端</string>
+    <string name="main_title">智能自行车实时监控系统</string>
+    <string name="find_title">蓝牙设备选择</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="about_author">Fengfz Product</string>
+    <string name="copyright"> CopyRight&#169;2014~2015</string>
+    <string name="about_title">基于蓝牙通讯的智能自行车参数及状态的手机实时监控软件设计与实现</string>
+    <string name="about_detail">\t\t\t\t1、手机通过蓝牙模块透传与智能自行车控制器进行双向通信。\n2、通信参数包括：速度、电压、电流、运行状态、位置以及各种控制命令等。\n3、控制器的串口通信协议及代码都得到了验证并成功应用。\n4、要求：根据通信协议，在手机上设计发送和接收各种参数、状态和命令的代码；并将计算分析和状态监测的结果以图表界面的方式手机上显示。</string>
+    <string name="about_note_title">软件说明</string>
+    <string name="about_note_detail">\t\t\t\t此APP作为毕业设计的课题而作。首先感谢指导老师徐世军老师的细心指导，还有同组成员的热心帮助。再者由于完成时间仓促，此APP难免有不足之处，欢迎指正。</string>
+    <string name="about_note_end">2015年5月 于 重庆理工大学</string>
+    <string name="Text"> -</string>
+    <string name="on">打开</string>
+    <string name="off">关闭</string>
+    <string name="List">已配对设备</string>
+    <string name="find_findnew">查找新设备</string>
+    <string name="find_show">设备可见</string>
+    <string name="find_cancel">取消查找</string>
+    <string name="error_not_support"> 设备不支持蓝牙</string>
+    <string name="help_title"> 帮助信息</string>
+    <string name="help1">3.2 pc机（或手机）向控制器发送数据的数据格式
+pc机（或手机）发送数据到车控制器的数据帧格式见表3-1.
+表3-1 pc机（或手机）发送数据到控制器的数据帧格式
+字节序号	1	2	3	4	5	6	7	8	9	10	11	12
+字节值	0x3A	0x1A	Func	Num=04	Data1	Data2	Data3	Data4	sumL	sumH	0x0D	0x0A
+
+（1）起始标志0x3A、0x1A
+连续的0x3A、0x1A字节代表一个数据帧的开始。
+（2）功能码Func
+功能码有49、0x47和0x48。
+① 0x49配置参数：发送控制器的配置参数使用功能码0x49。（注：原来为0x46，发送端和接收端要相应修改）。
+② 0x47 命令：停机、开机、关灯、开灯、转把检查、扭矩检查和刹车检查使用功能码0x47。
+③ 0x48 请求回传：请求控制器发送控制器状态时使用功能码0x48。
+（3）数据字节数Num=04
+此处的数据字节数为4，表示一个数据帧中有四个数据字节。
+（4）数据字节
+① 发送配置参数时，四个数据字节分别是：限速值、限流值、停机电压和助力比值。这四个数据的具体细节见《PC,面板通信参数.xls》。
+② 发送“停机”、“开机”、“关灯”、“开灯”命令及启动转把、扭矩和刹车检查、退出检查时，数据字节1为命令码，数据字节2-数据字节4为0。
+开机：数据字节1为1；
+停机：数据字节1为2；
+关灯：数据字节1为3；
+开灯：数据字节1为4；
+转把检查：数据字节1为5；
+扭矩检查：数据字节1为6；
+刹车检查：数据字节1为7；
+退出检查：数据字节1为8。
+③ 请求下位机发送控制器状态时，四个数据字节都为0。
+（5）校验码（sumL和sumH）
+sumL：累加校验和低字节。 
+sunH：累加校验和高字节。 
+此处的累加校验和是从第2个字节（0x1A）到第8个字节（数据字节4）的累加。
+（6）结束字节
+用0x0D和0x0A作为一个数据帧的结束。</string>
+    <string name="help_2">3.3.1控制器发送状态到pc机（或手机）的数据帧
+按先后顺序包含以下字节：
+（1）字节1：起始标志0x3A
+（2）字节2：起始标志0x1A
+（3）字节3：功能码0x48
+（4）字节4：数据字节个数，为16
+（5）字节5：3相PWM周期 低字节 sd_o
+（6）字节6：3相PWM周期 高低字节 sd_o1
+（7）字节7：MOS管温度值 wd_s
+（8）字节8：电池电压值 dyv_s
+（9）字节9：扭矩值 njv_s
+（10）字节10：占空比值 duty
+（11）字节11： 消噪标志 xzbz
+（12）字节12：电机运行标志 run
+（13）字节13：扭矩助力标志 njwg
+（14）字节14：车轮运行一圈毫秒值 低字节 tme1o
+（15）字节15：车轮运行一圈毫秒值 高低字节 tme2o
+（16）字节16：电池电压等级 dcdl
+（17）字节17：电机电流净值 I_pj
+（18）字节18：故障停机标志 gzz1
+（19）字节19：故障保护标志 gzz2
+（20）字节20：自动检测通过标志 OK
+（21）字节21：sumL
+（22）字节22：sumH
+（23）字节23：0x0D
+（24）字节24：0x0A
+以上个数据字节的含义见《PC,面板通信参数.xls》。
+sumL是从字节2到20累加和的低字节。sumH是从字节2到20累加和的高字节。</string>
+
+</resources>

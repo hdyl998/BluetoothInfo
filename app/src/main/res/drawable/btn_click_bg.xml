@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+	<item android:drawable="@drawable/radius" android:state_pressed="true"/>
+    <item android:drawable="@color/c00000000"/> 
+<!-- 	文本选中，高亮显示，没有选中的灰色显示 -->
+</selector>

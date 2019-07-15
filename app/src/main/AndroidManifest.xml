@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.hdyl.bluetoothinfo">
+
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+
+    <application
+        android:name=".App"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="com.fengfz.bmc.start.StartActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.fengfz.bmc.client.ClientActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name="com.fengfz.bmc.about.AboutActivity"></activity>
+        <activity
+            android:name="com.fengfz.bmc.chat.SearchDeviceActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name="com.fengfz.bmc.chat.ChatActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name="com.fengfz.bmc.server.ServerActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name="com.fengfz.bmc.finddevice.FindDeviceActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name="com.fengfz.bmc.client.MainClientActivity"
+            android:screenOrientation="portrait"></activity>
+    </application>
+
+</manifest>

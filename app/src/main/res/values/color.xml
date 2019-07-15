@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="white">#ffffff</color>
+    <color name="c00000000">#00000000</color>
+    <color name="black">#000000</color>
+    <color name="red">#ff0000</color>
+    <color name="green">#00ff00</color>
+    <color name="blue">#0000ff</color>
+    <color name="lightgreen">#00ffff</color>
+    <color name="perpule">#ff00ff</color>
+    <color name="yellow">#ffff00</color>
+    <color name="orange">#f8a131</color>
+    <!-- MORE -->
+    <color name="apk_bg_title">#e8e8e8</color>
+    <color name="apk_bg">#f5f5f5</color>
+    <color name="more_t0">#7e7f81</color>
+    <color name="more_t1">#3b3838</color>
+    <color name="more_t2">#797b7e</color>
+    
+    <color name="title_color">#3e75ec</color>
+    <color name="title_pressed_color">#0000ff</color>
+    <!-- 对话框确认字体颜色 -->
+    <color name="dialog_confirm">#0094b0</color>
+    <!-- 按下BUTTON的效果 -->
+    <color name="button_click_bg">#F2F2F2</color>
+</resources>

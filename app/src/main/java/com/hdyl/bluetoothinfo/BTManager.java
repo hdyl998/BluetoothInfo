@@ -25,7 +25,7 @@ public class BTManager {
 
     private final static BTManager instance = new BTManager();
 
-    public static BTManager getInstance() {
+    public static BTManager get() {
         return instance;
     }
 }

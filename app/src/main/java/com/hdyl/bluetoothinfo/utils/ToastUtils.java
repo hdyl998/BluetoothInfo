@@ -14,7 +14,7 @@ public class ToastUtils {
     private static Toast toast;
     private static final String TAG = "ToastUtils";
 
-    public static void show(String string) {
+    public static void show(CharSequence string) {
         if (TextUtils.isEmpty(string)) {//空TOAST 或者 在后台时不弹出提示
             LogUitls.print(TAG, string);
             return;

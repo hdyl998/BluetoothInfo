@@ -23,8 +23,6 @@ import android.widget.ProgressBar;
 import android.widget.Switch;
 import android.widget.TextView;
 
-import com.fengfz.bmc.finddevice.DeviceItem;
-import com.fengfz.bmc.finddevice.DeviceListAdapter;
 import com.hdyl.bluetoothinfo.utils.ToastUtils;
 import com.hdyl.bluetoothinfo.utils.bufferknife.MyBindView;
 import com.hdyl.bluetoothinfo.utils.bufferknife.MyBufferKnifeUtils;
@@ -33,7 +31,6 @@ import com.hdyl.bluetoothinfo.utils.loopdo.MyCountDownTimer;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -61,6 +58,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     ListView listView;
 
 
+    @MyBindView(R.id.btnBond)
+    Button btnBond;//设备可见
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
-        if (btAdapter==null) {
+        if (btAdapter == null) {
             tvNotSupport.setVisibility(View.VISIBLE);
             llContent.setVisibility(View.GONE);
             return;
@@ -97,15 +97,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 } else {
                     btAdapter.enable();
                 }
-                updateStatus();
+
+                listView.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        updateStatus();
+                    }
+                }, 200);
             }
         });
-        aSwitch.setTextOn("蓝牙状态--开");
-        aSwitch.setTextOff("蓝牙状态--关");
+//        aSwitch.setTextOn("蓝牙状态--开");
+//        aSwitch.setTextOff("蓝牙状态--关");
         updateStatus();
         initReceiver();
+        updateFindingUi(false);
 
-        adapter = new DeviceListAdapter(mContext, listDeviceItems);
+        adapter = new DeviceInfoAdapter(mContext, new ArrayList<>());
         listView.setAdapter(adapter);
         //短按操作
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -114,7 +121,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 if (!checkBtAvaible()) {
                     return;
                 }
-                DeviceItem item = listDeviceItems.get(position);
+                BluetoothDevice item = adapter.getItem(position);
                 //查询最新的状态
                 new AlertDialog.Builder(mContext).setTitle("信息")
                         .setMessage(item.toString())
@@ -129,12 +136,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 if (!checkBtAvaible()) {
                     return true;
                 }
-                DeviceItem item = listDeviceItems.get(position);
+                BluetoothDevice item = adapter.getItem(position);
                 //查询最新的状态
-                showHandleMenu(item.getDevice());
+                showHandleMenu(item);
                 return true;
             }
         });
+
     }
 
     @Override
@@ -169,6 +177,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             return;
         }
 
+        int[] finalHandleId = handleId;
         new AlertDialog.Builder(mContext)
                 .setTitle("菜单")
                 .setItems(menus, new DialogInterface.OnClickListener() {
@@ -176,7 +185,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     public void onClick(DialogInterface dialog, int which) {
 
                         try {
-                            switch (which) {
+                            switch (finalHandleId[which]) {
                                 case HANDLE_ID_BOND:
                                     doBind(device);
                                     break;
@@ -210,13 +219,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         //配对方法二：
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-
             device.createBond();
         } else {
             //配对方法一：
             Method createBondMethod = device.getClass().getMethod("createBond");
             Boolean returnValue = (Boolean) createBondMethod.invoke(device);
-
         }
     }
 
@@ -256,8 +263,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return true;
     }
 
-    private DeviceListAdapter adapter;
-    private List<DeviceItem> listDeviceItems = new ArrayList<>();// 设备列表数据
+    private DeviceInfoAdapter adapter;
 
     @Override
     protected void onDestroy() {
@@ -276,10 +282,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     break;
                 case BluetoothDevice.ACTION_FOUND:
                     BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
-                    DeviceItem item = new DeviceItem(device.getName(), device.getAddress());
-                    item.setDevice(device);
-                    listDeviceItems.add(item);
-                    adapter.notifyDataSetChanged();
+                    adapter.add(device);
                     break;
                 case BluetoothAdapter.ACTION_DISCOVERY_FINISHED:
                     ToastUtils.show("扫描结束");
@@ -304,10 +307,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-    @MyOnClick({R.id.btnSearch, R.id.btnSearch})
+    @MyOnClick({R.id.btnDeviceVisiable, R.id.btnSearch, R.id.btnBond})
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.btnBond:
+                if (!checkBtAvaible()) {
+                    return;
+                }
+                adapter.getAllData().clear();
+                adapter.getAllData().addAll(btAdapter.getBondedDevices());
+                adapter.notifyDataSetChanged();
+                break;
             case R.id.btnDeviceVisiable:
                 if (!checkBtAvaible()) {
                     return;
@@ -324,6 +335,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     btAdapter.cancelDiscovery();
                     updateFindingUi(false);
                 } else {//没在在查找设备
+                    adapter.clear();
                     btAdapter.startDiscovery();
                     updateFindingUi(true);
                 }

@@ -20,6 +20,13 @@ public class DeviceItem {
         this.addr = addr;
     }
 
+    public DeviceItem(BluetoothDevice device) {
+        this.name = device.getName();
+        this.addr = device.getAddress();
+        this.device = device;
+    }
+
+
     public BluetoothDevice getDevice() {
         return device;
     }

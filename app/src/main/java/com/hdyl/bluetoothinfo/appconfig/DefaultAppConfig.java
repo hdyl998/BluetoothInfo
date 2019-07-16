@@ -8,7 +8,7 @@ package com.hdyl.bluetoothinfo.appconfig;
 public class DefaultAppConfig implements IBaseAppConfig {
     @Override
     public boolean isDebug() {
-        return false;
+        return true;
     }
 
     @Override
@@ -18,6 +18,6 @@ public class DefaultAppConfig implements IBaseAppConfig {
 
     @Override
     public boolean isTestFun() {
-        return false;
+        return true;
     }
 }

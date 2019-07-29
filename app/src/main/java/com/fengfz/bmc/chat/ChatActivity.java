@@ -20,7 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.fengfz.bmc.common.Consts;
-import com.hdyl.bluetoothinfo.R;
+import com.hdyl.bttech.R;
 
 import java.io.IOException;
 import java.io.InputStream;

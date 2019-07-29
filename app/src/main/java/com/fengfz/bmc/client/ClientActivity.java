@@ -22,7 +22,7 @@ import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 
-import com.hdyl.bluetoothinfo.R;
+import com.hdyl.bttech.R;
 import com.fengfz.bmc.common.BaseActivity;
 import com.fengfz.bmc.common.Consts;
 import com.fengfz.bmc.common.MyDialog;

@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
 
-import com.hdyl.bluetoothinfo.R;
+import com.hdyl.bttech.R;
 
 
 public class AboutActivity extends Activity implements OnClickListener {

@@ -7,7 +7,7 @@ import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 
-import com.hdyl.bluetoothinfo.R;
+import com.hdyl.bttech.R;
 
 //设置对话框
 public class SetDialog extends Dialog implements android.view.View.OnClickListener {

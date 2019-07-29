@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.hdyl.bluetoothinfo.R;
+import com.hdyl.bttech.R;
 
 
 /**

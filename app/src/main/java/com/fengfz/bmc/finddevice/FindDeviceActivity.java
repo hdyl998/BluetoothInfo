@@ -22,7 +22,7 @@ import com.fengfz.bmc.client.MainClientActivity;
 import com.fengfz.bmc.common.BaseActivity;
 import com.fengfz.bmc.server.ServerActivity;
 import com.fengfz.bmc.utls.Utls;
-import com.hdyl.bluetoothinfo.R;
+import com.hdyl.bttech.R;
 
 import java.util.ArrayList;
 import java.util.List;

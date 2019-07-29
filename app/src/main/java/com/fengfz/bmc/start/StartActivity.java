@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.WindowManager;
 
-import com.hdyl.bluetoothinfo.R;
+import com.hdyl.bttech.R;
 import com.fengfz.bmc.finddevice.FindDeviceActivity;
 
 //启动activity

@@ -1,11 +1,11 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 26
+    compileSdkVersion COMPILE_SDK_VERSION as int
     defaultConfig {
-        applicationId "com.hdyl.bluetoothinfo"
-        minSdkVersion 14
-        targetSdkVersion 26
+        applicationId "com.hdyl.bttech"
+        minSdkVersion MIN_SDK_VERSION as int
+        targetSdkVersion TARGET_SDK_VERSION as int
         versionCode 1
         versionName "1.0"
     }
@@ -23,6 +23,6 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.android.support:appcompat-v7:26.1.0'
-    api 'com.alibaba:fastjson:1.2.44'
+    implementation 'com.android.support:appcompat-v7:'+SUPPORT_VERSION
+    implementation project(':applib')
 }

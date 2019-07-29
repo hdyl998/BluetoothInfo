@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 
-import com.hdyl.bluetoothinfo.R;
+import com.hdyl.bttech.R;
 
 //我的对话框
 public class MyDialog extends Dialog implements android.view.View.OnClickListener {

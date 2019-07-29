@@ -13,7 +13,7 @@ import android.util.Log;
 import android.util.TypedValue;
 import android.widget.Toast;
 
-import com.hdyl.bluetoothinfo.R;
+import com.hdyl.bttech.R;
 
 //工具类
 public class Utls {

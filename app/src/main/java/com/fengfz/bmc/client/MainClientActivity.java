@@ -1,12 +1,5 @@
 package com.fengfz.bmc.client;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-
 import android.annotation.SuppressLint;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -28,7 +21,6 @@ import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 
-import com.hdyl.bttech.R;
 import com.fengfz.bmc.client.SetDialog.IListener;
 import com.fengfz.bmc.common.BaseActivity;
 import com.fengfz.bmc.common.Consts;
@@ -38,6 +30,14 @@ import com.fengfz.bmc.utls.CalcTool;
 import com.fengfz.bmc.utls.SPUtils;
 import com.fengfz.bmc.utls.Utls;
 import com.fengfz.bmc.view.MyProgressView;
+import com.hdyl.bttech.R;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 //客户端
 @SuppressLint("HandlerLeak")
@@ -359,31 +359,19 @@ public class MainClientActivity extends BaseActivity implements OnClickListener 
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
-			String startFlag=new String(new byte[]{0x3A,0x1A},0,2);
-			String endFlag=new String(new byte[]{0x0D,0x0A},0,2);
-			String tempString="";
+//			String startFlag=new String(new byte[]{0x3A,0x1A},0,2);
+//			String endFlag=new String(new byte[]{0x0D,0x0A},0,2);
+//			String tempString="";
 			while (true) {
 				try {
 					// Read from the InputStream
 					if ((bytes = mmInStream.read(buffer)) > 0) {
-
-						String string = new String(buffer, 0, bytes);
-						Utls.printLog(Utls.bytes2HexString(string.getBytes()));
-						tempString+=string;
-
-						int indexStart = tempString.indexOf(startFlag);
-						if (indexStart != -1) {
-							tempString = tempString.substring(indexStart);
-							int indexEnd = tempString.indexOf(endFlag);
-							if (indexEnd > -1) {
-								indexEnd += 2;
-								Message msg = handler.obtainMessage();// 获取消息队列中的msg
-								msg.what = 1;// 消息编号为1
-								msg.obj = tempString.substring(0, indexEnd).getBytes();
-								handler.sendMessage(msg);
-								tempString = tempString.substring(indexEnd);
-							}
-						}
+						byte byteArray[]=new byte[bytes];
+						System.arraycopy(buffer,0,byteArray,0,bytes);
+						Message msg = handler.obtainMessage();// 获取消息队列中的msg
+						msg.what = 1;// 消息编号为1
+						msg.obj = byteArray;
+						handler.sendMessage(msg);
 					}
 				} catch (IOException e) {
 					Utls.printLog(e.toString());
@@ -421,8 +409,8 @@ public class MainClientActivity extends BaseActivity implements OnClickListener 
 				// 启动接受数据
 				mreadThread = new ReadThread();
 				mreadThread.start();
-				getDataThread = new GetDataThread();// 启动获得数据线程
-				getDataThread.start();
+//				getDataThread = new GetDataThread();// 启动获得数据线程
+//				getDataThread.start();
 			} catch (IOException e) {
 				setTextInfo("连接服务端异常！请打开服务端或重新连接试一试。");
 			}
